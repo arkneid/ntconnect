@@ -1,9 +1,33 @@
 // includes
-#include <stdio.h>
+#include "functions.h"
+#include <string.h>
+#include <stdlib.h>
+/***********************/
 
-
-int main() {
-	printf("Hello World!!!");	
+int main(int argc, char **argv) 
+{
+	const char* net_file = "/etc/network/interfaces";
+	
+	if(check_args(argc, argv, "-h") == 1 || check_args(argc, argv, "--help") == 1)
+	{
+		help();
+		return 0;
+	}
+	if(argc > 4)
+	{
+		if(check_args(argc, argv, "-p") != 1 || check_args(argc, argv, "-s") != 1 || check_args(argc, argv, "-w") != 1)
+		{
+			help();
+		}
+		else
+		{
+			write_file(argc, argv, net_file);
+		}
+	}
+	else
+	{
+		help();
+	}
 
 	return 0;
 }
