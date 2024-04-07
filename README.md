@@ -1,5 +1,5 @@
 # nconnect
-C tool to facilitate the connection to networks
+C tool to facilitate the connection to networks from the terminal
 
 # Installation
 <ol>
@@ -36,6 +36,8 @@ Normal usage:
 
 ```bash
 sudo nconnect -s <network_ssid> -w <wireless_network_interface> -p <network_password>
+sudo ifdown <wireless_network_interface>
+sudo ifup <wireless_network_interface>
 ```
 
 Print help:
