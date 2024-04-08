@@ -1,5 +1,6 @@
 # nconnect
-C tool to facilitate the connection to networks from the terminal
+C tool to facilitate the connection to networks from the terminal.
+This will edit the file /etc/network/interface to put the correct wireless network information inside.
 
 # Installation
 <ol>
