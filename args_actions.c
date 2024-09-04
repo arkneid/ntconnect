@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 /***********************/
 
 void help()
@@ -61,6 +62,48 @@ void file_rename(char* src, const char* dst)
 		printf("Something went wrong while renaming the tmp file to the original file");
 }
 
+void check_inet_line(const char* orig_file, char* w_card)
+{
+	char line[100];
+	FILE* orig_file_r;
+        FILE* f_w;
+	bool written = false;
+	char n_line[100] = "";
+
+	orig_file_r = fopen(orig_file, "r");
+        f_w = fopen("replace_check.tmp", "w");
+        if(orig_file_r != NULL || f_w != NULL)
+        {
+		while(fgets(line, 100, orig_file_r))
+		{
+			if(strstr(line, w_card) != NULL && strstr(line, "inet") != NULL && strstr(line, "iface") != NULL)
+			{
+				written = true;
+				fputs(line, f_w);
+			}
+			else if(strstr(line, "wireless-essid") == NULL && strstr(line, "wireless-mode") == NULL && strstr(line, "wpa-ssid") == NULL && strstr(line, "wpa-psk") == NULL)
+			{
+				fputs(line, f_w);
+			}
+		}
+
+		if(written == 0)
+		{
+			strcat(n_line, "\n# Custom nconnect\niface ");
+			strcat(n_line, w_card);
+			strcat(n_line, " inet dhcp");
+			strcat(n_line, "\n");
+			fputs(n_line, f_w);
+		}
+	}
+	else
+	{
+		printf("One of the files was not accessible!");
+	}
+	fclose(f_w);
+        fclose(orig_file_r);
+}
+
 void write_file(int nargs, char** args, const char* file_name)
 {
 	int i;
@@ -92,8 +135,10 @@ void write_file(int nargs, char** args, const char* file_name)
 	printf("SSID: %s\n", ssid);
 	printf("PASSWORD: %s\n", password);
 	printf("Wireless Card: %s\n", wireless_card);
-
-	file_r = fopen(file_name, "r");
+	
+	check_inet_line(file_name, wireless_card);
+	
+	file_r = fopen("replace_check.tmp", "r");
 	file_w = fopen("replace.tmp", "w");
 	if(file_r != NULL || file_w != NULL)
 	{
@@ -113,7 +158,9 @@ void write_file(int nargs, char** args, const char* file_name)
 				fputs(final_line, file_w);
 			}
 			else if(strstr(line, "wireless-essid") == NULL && strstr(line, "wireless-mode") == NULL && strstr(line, "wpa-ssid") == NULL && strstr(line, "wpa-psk") == NULL)
+			{
 				fputs(line, file_w);
+			}
 		}
 	}
 	else
@@ -125,6 +172,7 @@ void write_file(int nargs, char** args, const char* file_name)
 	remove(file_name);
 	file_rename("replace.tmp", file_name);
 	remove("replace.tmp");
+	remove("replace_check.tmp");
 	free(ssid);
 	free(password);
 	free(wireless_card);
