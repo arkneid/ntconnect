@@ -22,8 +22,8 @@ build: $(OBJ_FILES)
 	$(CC) $(CFLAGS) $(OBJ_FILES) -o $(DFOLDER)/$(NAME)
 
 install: all
-	mkdir -p $(INSTALL_FOLDERS)/bin
-	cp -f $(DFOLDER)/$(NAME) $(INSTALL_FOLDERS)/bin
+	mkdir -p $(INSTALL_FOLDER)/bin
+	cp -f $(DFOLDER)/$(NAME) $(INSTALL_FOLDER)/bin
 
 uninstall: 
 	$(RM) $(INSTALL_FOLDER)/bin/$(NAME)
