@@ -125,4 +125,7 @@ void write_file(int nargs, char** args, const char* file_name)
 	remove(file_name);
 	file_rename("replace.tmp", file_name);
 	remove("replace.tmp");
+	free(ssid);
+	free(password);
+	free(wireless_card);
 }
