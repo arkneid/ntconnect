@@ -13,9 +13,22 @@ int main(int argc, char **argv)
 		help();
 		return 0;
 	}
-	if(argc > 4)
+	
+	
+	if(argc == 7)
 	{
-		if(check_args(argc, argv, "-p") != 1 || check_args(argc, argv, "-s") != 1 || check_args(argc, argv, "-w") != 1)
+		if(check_args(argc, argv, "-m"))
+		{
+			if((check_args(argc, argv, "-s") != 1 || check_args(argc, argv, "-w") != 1) && check_args(argc, argv, "-p") == 1)
+			{
+				help();
+			}
+			else
+			{
+				write_file_portal(argc, argv, net_file);
+			}
+		}
+		else if(check_args(argc, argv, "-p") != 1 || check_args(argc, argv, "-s") != 1 || check_args(argc, argv, "-w") != 1)
 		{
 			help();
 		}
