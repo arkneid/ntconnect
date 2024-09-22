@@ -110,148 +110,158 @@ void check_inet_line(const char* orig_file, char* w_card)
 
 void write_file(int nargs, char** args, const char* file_name)
 {
-	int i;
-	char* ssid;
-	char* password;
-	char* wireless_card;
-	char line[100];
-	char final_line[100];
-	FILE* file_r;
-	FILE* file_w;
+    int i;
+    char* ssid;
+    char* password;
+    char* wireless_card;
+    char line[100];
+    char final_line[100];
+    FILE* file_r;
+    FILE* file_w;
 
-	i = 0;
-	while(i < nargs)
-	{
-		if(nc_strcmp(args[i], "-s") == 0)
-		{
-			ssid = nc_strcpy(ssid, args[i+1]);
-		}
-		else if(nc_strcmp(args[i], "-p") == 0)
-		{
-			password = nc_strcpy(password, args[i+1]);
-		}
-		else if(nc_strcmp(args[i], "-w") == 0)
-		{
-			wireless_card = nc_strcpy(wireless_card, args[i+1]);
-		}
-		i++;
-	}
-	printf("SSID: %s\n", ssid);
-	printf("PASSWORD: %s\n", password);
-	printf("Wireless Card: %s\n", wireless_card);
-	
-	check_inet_line(file_name, wireless_card);
-	
-	file_r = fopen("replace_check.tmp", "r");
-	file_w = fopen("replace.tmp", "w");
-	if(file_r != NULL || file_w != NULL)
-	{
-		while(fgets(line, 100, file_r))
-		{
-			if(strstr(line, wireless_card) != NULL && strstr(line, "inet") != NULL && strstr(line, "iface") != NULL)
-			{
-				strcat(final_line, line);
-				strcat(final_line, "\t");
-				strcat(final_line, "wpa-ssid ");
-				strcat(final_line, ssid);
-				strcat(final_line, "\n");
-				strcat(final_line, "\t");
-				strcat(final_line, "wpa-psk ");
-				strcat(final_line, password);
-				strcat(final_line, "\n");
-				fputs(final_line, file_w);
-			}
-			else if(strstr(line, "wireless-essid") == NULL && strstr(line, "wireless-mode") == NULL && strstr(line, "wpa-ssid") == NULL && strstr(line, "wpa-psk") == NULL)
-			{
-				fputs(line, file_w);
-			}
-		}
-	}
-	else
-	{
-		printf("One of the files was not accessible!");
-	}
-	fclose(file_w);
-	fclose(file_r);
-	remove(file_name);
-	file_rename("replace.tmp", file_name);
-	remove("replace.tmp");
-	remove("replace_check.tmp");
-	free(ssid);
-	free(password);
-	free(wireless_card);
+    i = 0;
+    while(i < nargs)
+    {
+        if(nc_strcmp(args[i], "-s") == 0)
+        {
+            ssid = nc_strcpy(ssid, args[i+1]);
+        }
+        else if(nc_strcmp(args[i], "-p") == 0)
+        {
+            password = nc_strcpy(password, args[i+1]);
+        }
+        else if(nc_strcmp(args[i], "-w") == 0)
+        {
+            wireless_card = nc_strcpy(wireless_card, args[i+1]);
+        }
+        i++;
+    }
+    printf("SSID: %s\n", ssid);
+    printf("PASSWORD: %s\n", password);
+    printf("Wireless Card: %s\n", wireless_card);
+    
+    check_inet_line(file_name, wireless_card);
+    
+    file_r = fopen("replace_check.tmp", "r");
+    file_w = fopen("replace.tmp", "w");
+    if(file_r != NULL || file_w != NULL)
+    {
+        while(fgets(line, 100, file_r))
+        {
+            if(strstr(line, wireless_card) != NULL && strstr(line, "inet") != NULL && strstr(line, "iface") != NULL)
+            {
+                strcat(final_line, line);
+                strcat(final_line, "\t");
+                strcat(final_line, "wpa-ssid ");
+                strcat(final_line, ssid);
+                strcat(final_line, "\n");
+                strcat(final_line, "\t");
+                strcat(final_line, "wpa-psk ");
+                strcat(final_line, password);
+                strcat(final_line, "\n");
+                fputs(final_line, file_w);
+            }
+            else if(strstr(line, "wireless-essid") == NULL && strstr(line, "wireless-mode") == NULL && strstr(line, "wpa-ssid") == NULL && strstr(line, "wpa-psk") == NULL)
+            {
+                fputs(line, file_w);
+            }
+        }
+    }
+    else
+    {
+        printf("One of the files was not accessible!");
+    }
+    fclose(file_w);
+    fclose(file_r);
+    remove(file_name);
+    file_rename("replace.tmp", file_name);
+    remove("replace.tmp");
+    remove("replace_check.tmp");
+
+    // Write history
+    write_history(ssid, password, wireless_card, false);
+
+    // Free memory
+    free(ssid);
+    free(password);
+    free(wireless_card);
 }
 
 void write_file_portal(int nargs, char** args, const char* file_name)
 {
-	int i;
-	char* ssid;
-	char* conn_mode;
-	char* wireless_card;
-	char line[100];
-	char final_line[100];
-	FILE* file_r;
-	FILE* file_w;
+    int i;
+    char* ssid;
+    char* conn_mode;
+    char* wireless_card;
+    char line[100];
+    char final_line[100];
+    FILE* file_r;
+    FILE* file_w;
 
-	i = 0;
-	while(i < nargs)
-	{
-		if(nc_strcmp(args[i], "-s") == 0)
-		{
-			ssid = nc_strcpy(ssid, args[i+1]);
-		}
-		else if(nc_strcmp(args[i], "-m") == 0)
-		{
-			conn_mode = nc_strcpy(conn_mode, args[i+1]);
-		}
-		else if(nc_strcmp(args[i], "-w") == 0)
-		{
-			wireless_card = nc_strcpy(wireless_card, args[i+1]);
-		}
-		i++;
-	}
-	printf("SSID: %s\n", ssid);
-	printf("MODE: %s\n", conn_mode);
-	printf("Wireless Card: %s\n", wireless_card);
-	
-	check_inet_line(file_name, wireless_card);
-	
-	file_r = fopen("replace_check.tmp", "r");
-	file_w = fopen("replace.tmp", "w");
-	if(file_r != NULL || file_w != NULL)
-	{
-		while(fgets(line, 100, file_r))
-		{
-			if(strstr(line, wireless_card) != NULL && strstr(line, "inet") != NULL && strstr(line, "iface") != NULL)
-			{
-				strcat(final_line, line);
-				strcat(final_line, "\t");
-				strcat(final_line, "wireless-essid ");
-				strcat(final_line, ssid);
-				strcat(final_line, "\n");
-				strcat(final_line, "\t");
-				strcat(final_line, "wireless-mode ");
-				strcat(final_line, "managed");
-				strcat(final_line, "\n");
-				fputs(final_line, file_w);
-			}
-			else if(strstr(line, "wireless-essid") == NULL && strstr(line, "wireless-mode") == NULL && strstr(line, "wpa-ssid") == NULL && strstr(line, "wpa-psk") == NULL)
-			{
-				fputs(line, file_w);
-			}
-		}
-	}
-	else
-	{
-		printf("One of the files was not accessible!");
-	}
-	fclose(file_w);
-	fclose(file_r);
-	remove(file_name);
-	file_rename("replace.tmp", file_name);
-	remove("replace.tmp");
-	remove("replace_check.tmp");
-	free(ssid);
-	free(conn_mode);
-	free(wireless_card);
+    i = 0;
+    while(i < nargs)
+    {
+        if(nc_strcmp(args[i], "-s") == 0)
+        {
+            ssid = nc_strcpy(ssid, args[i+1]);
+        }
+        else if(nc_strcmp(args[i], "-m") == 0)
+        {
+            conn_mode = nc_strcpy(conn_mode, args[i+1]);
+        }
+        else if(nc_strcmp(args[i], "-w") == 0)
+        {
+            wireless_card = nc_strcpy(wireless_card, args[i+1]);
+        }
+        i++;
+    }
+    printf("SSID: %s\n", ssid);
+    printf("MODE: %s\n", conn_mode);
+    printf("Wireless Card: %s\n", wireless_card);
+    
+    check_inet_line(file_name, wireless_card);
+    
+    file_r = fopen("replace_check.tmp", "r");
+    file_w = fopen("replace.tmp", "w");
+    if(file_r != NULL || file_w != NULL)
+    {
+        while(fgets(line, 100, file_r))
+        {
+            if(strstr(line, wireless_card) != NULL && strstr(line, "inet") != NULL && strstr(line, "iface") != NULL)
+            {
+                strcat(final_line, line);
+                strcat(final_line, "\t");
+                strcat(final_line, "wireless-essid ");
+                strcat(final_line, ssid);
+                strcat(final_line, "\n");
+                strcat(final_line, "\t");
+                strcat(final_line, "wireless-mode ");
+                strcat(final_line, "managed");
+                strcat(final_line, "\n");
+                fputs(final_line, file_w);
+            }
+            else if(strstr(line, "wireless-essid") == NULL && strstr(line, "wireless-mode") == NULL && strstr(line, "wpa-ssid") == NULL && strstr(line, "wpa-psk") == NULL)
+            {
+                fputs(line, file_w);
+            }
+        }
+    }
+    else
+    {
+        printf("One of the files was not accessible!");
+    }
+    fclose(file_w);
+    fclose(file_r);
+    remove(file_name);
+    file_rename("replace.tmp", file_name);
+    remove("replace.tmp");
+    remove("replace_check.tmp");
+    
+    // Write history
+    write_history(ssid, "", wireless_card, true);
+
+    // Free memory
+    free(ssid);
+    free(conn_mode);
+    free(wireless_card);
 }

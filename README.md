@@ -1,6 +1,6 @@
 # ntconnect
 C tool to facilitate the connection to networks from the terminal.
-This will edit the file /etc/network/interface to put the correct wireless network information inside.
+This will edit the file /etc/network/interfaces to put the correct wireless network information inside.
 
 # Installation
 <ol>
@@ -45,6 +45,11 @@ Print help:
 
 ```bash
 sudo ntconnect -h or sudo ntconnect --help
+```
+
+Check History:
+```bash
+sudo ntconnect -H or sudo ntconnect --history
 ```
 
 # Author

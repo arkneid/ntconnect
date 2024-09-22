@@ -53,3 +53,7 @@ dkms.conf
 
 # Output Folders
 dest/
+
+# Custom files
+*.swp
+*.tmp
