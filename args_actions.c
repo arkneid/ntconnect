@@ -8,7 +8,7 @@
 
 void help()
 {
-	printf("Usage: nconnect [ARGS]\n"
+	printf("Usage: ntconnect [ARGS]\n"
 	"Connect to wireless network provided.\n"
 	"\n"
 	"ARGS:\n"
@@ -20,9 +20,9 @@ void help()
 	"\n"
 	"Examples:\n"
 	" Normal mode:\n"
-	"  nconnect -s Dummy_Network -p nEtWorkPass -w wlan1\n"
+	"  ntconnect -s Dummy_Network -p nEtWorkPass -w wlan1\n"
 	"\n Auth Portal mode:\n"
-	"  nconnect -m portal -s Dummy_Network -w wlan1\n"
+	"  ntconnect -m portal -s Dummy_Network -w wlan1\n"
 	"\n"
 	);
 }
@@ -93,7 +93,7 @@ void check_inet_line(const char* orig_file, char* w_card)
 
 		if(written == 0)
 		{
-			strcat(n_line, "\n# Custom nconnect\niface ");
+			strcat(n_line, "\n# Custom ntconnect\niface ");
 			strcat(n_line, w_card);
 			strcat(n_line, " inet dhcp");
 			strcat(n_line, "\n");

@@ -4,7 +4,7 @@ CFLAGS = -Wall -Werror -Wextra
 #CFLAGS = 
 RM = rm -rf
 DFOLDER = dest
-NAME = nconnect
+NAME = ntconnect
 INSTALL_FOLDER = /usr/local
 
 # Source files
@@ -18,7 +18,7 @@ $(OBJ_FILES): $(SRC_FILES)
 
 build: $(OBJ_FILES)
 	mkdir -p dest/
-	mkdir -p ${HOME}/.local/share/nconnect
+	mkdir -p ${HOME}/.local/share/$(NAME)
 	$(CC) $(CFLAGS) $(OBJ_FILES) -o $(DFOLDER)/$(NAME)
 
 install: all
@@ -27,7 +27,7 @@ install: all
 
 uninstall: 
 	$(RM) $(INSTALL_FOLDER)/bin/$(NAME)
-	$(RM) ${HOME}/.local/share/nconnect
+	$(RM) ${HOME}/.local/share/$(NAME)
 
 clean:
 	$(RM) $(OBJ_FILES) $(DFOLDER)
