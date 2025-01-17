@@ -1,4 +1,4 @@
-# nconnect
+# ntconnect
 C tool to facilitate the connection to networks from the terminal.
 This will edit the file /etc/network/interface to put the correct wireless network information inside.
 
@@ -7,15 +7,15 @@ This will edit the file /etc/network/interface to put the correct wireless netwo
 <li>Clone the master branch of this repository</li>
 	
 ```bash
-git clone https://github.com/arkneid/nconnect.git
+git clone https://github.com/arkneid/ntconnect.git
 ```
-<li>Enter the nconnect folder and run make command</li>
+<li>Enter the ntconnect folder and run make command</li>
 
 ```bash
-cd nconnect
+cd ntconnect
 make
 ```
-<li>Now install nconnect tool</li>	
+<li>Now install ntconnect tool</li>	
 
 ```bash
 sudo make clean install
@@ -27,7 +27,7 @@ sudo make clean install
 <li>Go to the previous clone git folder</li>
 
 ```bash
-cd nconnect
+cd ntconnect
 sudo make uninstall
 ```
 </ol>
@@ -36,7 +36,7 @@ sudo make uninstall
 Normal usage:
 
 ```bash
-sudo nconnect -s <network_ssid> -w <wireless_network_interface> -p <network_password>
+sudo ntconnect -s <network_ssid> -w <wireless_network_interface> -p <network_password>
 sudo ifdown <wireless_network_interface>
 sudo ifup <wireless_network_interface>
 ```
@@ -44,7 +44,7 @@ sudo ifup <wireless_network_interface>
 Print help:
 
 ```bash
-sudo nconnect -h or sudo nconnect --help
+sudo ntconnect -h or sudo ntconnect --help
 ```
 
 # Author
