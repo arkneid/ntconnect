@@ -1,5 +1,5 @@
 # ntconnect
-C tool to facilitate the connection to networks from the terminal.
+C tool to facilitate the connection to networks from the Linux terminal.
 This will edit the file /etc/network/interfaces to put the correct wireless network information inside.
 
 # Installation
@@ -37,6 +37,14 @@ Normal usage:
 
 ```bash
 sudo ntconnect -s <network_ssid> -w <wireless_network_interface> -p <network_password>
+sudo ifdown <wireless_network_interface>
+sudo ifup <wireless_network_interface>
+```
+
+Portal usage:
+
+```bash
+sudo ntconnect -m portal -s <network_ssid> -w <wireless_network_interface>
 sudo ifdown <wireless_network_interface>
 sudo ifup <wireless_network_interface>
 ```
