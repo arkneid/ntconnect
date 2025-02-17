@@ -1,4 +1,4 @@
-# ntconnect
+# ntconnect (Debian)
 C tool to facilitate the connection to networks from the Linux terminal.
 This will edit the file /etc/network/interfaces to put the correct wireless network information inside.
 
