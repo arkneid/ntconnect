@@ -22,10 +22,16 @@ int main(int argc, char **argv)
             return 0;
     }
 
-    if(argc == 2 && (check_args(argc, argv, "-H") == 1 || check_args(argc, argv, "--history")))
+    if(argc == 2 && (check_args(argc, argv, "-H") == 1 || check_args(argc, argv, "--history") == 1))
     {
         check_history();
         return 0;
+    }
+
+    if(argc == 2 && (check_args(argc, argv, "-l") == 1 || check_args(argc, argv, "--list") == 1))
+    {
+	    get_networks();
+	    return 0;
     }
 
     if(argc == 7)
