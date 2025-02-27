@@ -16,7 +16,8 @@ void help()
 	"  -p\t\tPassword of the network\n"
 	"  -w\t\tWireless card name\n"
 	"  -m\t\tMode of connection\n"
-	"  -H, --history\tDisplay all connections made in the past\n"
+	"  -H, --history\tCheck history (must the only argument if choosen)\n"
+	"  -l, --list\tList the wifi networks around you (myst be the only argument if choosen)\n"
 	"  -h, --help\tDisplay this help and exit\n"
 	"\n"
 	"Examples:\n"
@@ -26,6 +27,8 @@ void help()
 	"  sudo ntconnect -m portal -s Dummy_Network -w wlan1\n"
 	"\n History:\n"
 	"  sudo ntconnect -H\n"
+	"\n List networks available:\n"
+	"  sudo ntconnect -l\n"
 	"\n"
 	);
 }
