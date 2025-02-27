@@ -4,6 +4,11 @@ This will edit the file /etc/network/interfaces to put the correct wireless netw
 
 # Installation
 <ol>
+<li>Install the package libiw-dev</li>
+
+```bash
+sudo apt install libiw-dev
+```
 <li>Clone the master branch of this repository</li>
 	
 ```bash
@@ -58,6 +63,11 @@ sudo ntconnect -h or sudo ntconnect --help
 Check History:
 ```bash
 sudo ntconnect -H or sudo ntconnect --history
+```
+
+List WiFi networks:
+```bash
+sudo ntconnect -l or sudo ntconnect --list
 ```
 
 # Author
