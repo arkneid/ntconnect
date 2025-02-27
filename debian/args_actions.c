@@ -16,16 +16,29 @@ void help()
 	"  -p\t\tPassword of the network\n"
 	"  -w\t\tWireless card name\n"
 	"  -m\t\tMode of connection\n"
+<<<<<<< HEAD
 	"  -H, --history\tDisplay all connections made in the past\n"
+=======
+	"  -H\t\tCheck history (must the only argument if choosen)\n"
+	"  -l\t\tList the wifi networks around you (myst be the only argument if choosen)\n"
+>>>>>>> d2a4814 (#12 - Add get_networks function)
 	"  -h, --help\tDisplay this help and exit\n"
 	"\n"
 	"Examples:\n"
 	" Normal mode:\n"
 	"  sudo ntconnect -s Dummy_Network -p nEtWorkPass -w wlan1\n"
 	"\n Auth Portal mode:\n"
+<<<<<<< HEAD
 	"  sudo ntconnect -m portal -s Dummy_Network -w wlan1\n"
 	"\n History:\n"
 	"  sudo ntconnect -H\n"
+=======
+	"  ntconnect -m portal -s Dummy_Network -w wlan1\n"
+	"\n History:\n"
+	"  ntconnect -H\n"
+	"\n List networks available:\n"
+	"  ntconnect -l\n"
+>>>>>>> d2a4814 (#12 - Add get_networks function)
 	"\n"
 	);
 }
