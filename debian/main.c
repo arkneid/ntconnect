@@ -1,12 +1,20 @@
 // includes
 #include "functions.h"
+#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 /***********************/
 
 int main(int argc, char **argv) 
 {
     const char* net_file = "/etc/network/interfaces";
+
+    if(geteuid() != 0)
+    {
+	    printf("The ntconnect cannot be run without escalated privileges.\nPlease use sudo to do it!\n");
+	    return 1;
+    }
             
     if(check_args(argc, argv, "-h") == 1 || check_args(argc, argv, "--help") == 1)
     {
