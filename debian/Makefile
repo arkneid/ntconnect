@@ -1,14 +1,13 @@
 # Vars
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
-#CFLAGS = 
 RM = rm -rf
 DFOLDER = dest
 NAME = ntconnect
 INSTALL_FOLDER = /usr/local
 
 # Source files
-SRC_FILES = main.c args_actions.c string_lib.c history.c list_networks.c
+SRC_FILES = main.c args_actions.c string_lib.c history.c list_networks.c password_manipulation.c
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 # make options

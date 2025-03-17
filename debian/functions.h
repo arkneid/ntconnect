@@ -13,5 +13,7 @@ void write_file_portal(int nargs, char** args, const char* file_name);
 void check_history();
 void write_history(char* ssid, char* password, char* wireless_card, bool portal);
 void get_networks();
+void password_encrypt(char* pass_txt);
+void password_decrypt(char* pass_enc);
 
 #endif
