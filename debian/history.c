@@ -13,14 +13,21 @@ void check_history()
     char* HISTORY_FILE = strcat(HISTORY_FOLDER, "/history.txt");
     FILE *hist_file;
     char line[100];
-
+    
     // Open file in read mode
     hist_file = fopen(HISTORY_FILE, "r");
 
-    // Read file
-    while(fgets(line, 100, hist_file))
+    if(hist_file == NULL)
     {
-        printf("%s", line);
+	    printf("No history file yet available.\n");
+    }
+    else
+    {
+    	// Read file
+    	while(fgets(line, 100, hist_file))
+    	{
+        	printf("%s", line);
+    	}
     }
 }
 
@@ -35,6 +42,7 @@ void write_history(char* ssid, char* password, char* wireless_card, bool portal)
     char wireless_card_final[100] = "NETWORK CARD: ";
     
     strcat(ssid_final, ssid);
+    strcat(ssid_final, " | ");
     if(portal)
     {
         strcat(password_final, "AUTH PORTAL");
@@ -43,6 +51,7 @@ void write_history(char* ssid, char* password, char* wireless_card, bool portal)
     {
         strcat(password_final, password);
     }
+    strcat(password_final, " | ");
     strcat(wireless_card_final, wireless_card);
 
     hist_file = fopen(HISTORY_FILE, "a"); // Open file in append mode
