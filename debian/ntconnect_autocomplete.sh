@@ -11,10 +11,10 @@ _ntconnect_autocomplete() {
 
     case "$prev" in
         -w)
-            COMPREPLY=( $(compgen -W "$all_interfaces" -- "$cur") )
+            COMPREPLY=( $(compgen -W "$wifi_interfaces" -- "$cur") )
             ;;
         *)
-            COMPREPLY=( $(compgen -W "-s -p -w -m -h --help" -- "$cur") )
+            COMPREPLY=( $(compgen -W "-s -p -w -m -H -l -h --help" -- "$cur") )
             ;;
     esac
 }
